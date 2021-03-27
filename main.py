@@ -4,8 +4,12 @@ from tkinter import filedialog
 
 
 
+
 root = Tk()
 root.title('Paint')
+root.geometry('800x500')
+root.configure(background = 'white')
+
 
 
 #=========================
@@ -28,8 +32,6 @@ def rotate_right():
     pass
 
 
-#=========================
-
 # Menu
 my_menu = Menu(root)
 root.config(menu = my_menu)
@@ -47,10 +49,18 @@ file_menu.add_command(label= 'Exit', command = root.quit)
 
 edit_menu.add_cascade(label = 'Rotate right', command= rotate_left)
 edit_menu.add_cascade(label = 'Rotate left', command = rotate_left)
-
-
-
 #=========================
+frame_colors = Frame(root, bg='green').place()
+colors = {'Red': '#FF0000', 'Yellow' : '#FFFF00','Orange' : '#FFA500', 'Purple' : '#800080', 'White' : '#FFFFFF', 'Black': '#000000', 'Blue':'#0000FF'}
+i,j=0,0
+for color in colors:
+    Button(frame_colors,bg=colors[color], text = color).grid(row = i, column= j)
+    if i < 3:
+        i += 1
+    else:
+        j +=1
+        i=0
+
 
 
 root.mainloop()
