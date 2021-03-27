@@ -7,7 +7,8 @@ from tkinter import filedialog
 
 root = Tk()
 root.title('Paint')
-root.geometry('800x500')
+root.geometry('1000x400')
+root.resizable(0,0)
 root.configure(background = 'white')
 
 
@@ -50,16 +51,34 @@ file_menu.add_command(label= 'Exit', command = root.quit)
 edit_menu.add_cascade(label = 'Rotate right', command= rotate_left)
 edit_menu.add_cascade(label = 'Rotate left', command = rotate_left)
 #=========================
-frame_colors = Frame(root, bg='green').place()
-colors = {'Red': '#FF0000', 'Yellow' : '#FFFF00','Orange' : '#FFA500', 'Purple' : '#800080', 'White' : '#FFFFFF', 'Black': '#000000', 'Blue':'#0000FF'}
+main_frame = LabelFrame(root,bg = 'grey')
+main_frame. grid(row =0, column =0)
+
+frame_colors = LabelFrame(main_frame,text = 'Color', bg='grey',relief = RIDGE)
+frame_colors.grid(row=1, columnspan=2, sticky='W',padx=5, pady=5, ipadx=5, ipady=5)
+
+frame_tool = LabelFrame(main_frame,text = 'Tools', bg='grey',relief = RIDGE)
+frame_tool.grid(row=6, columnspan=2, sticky='W',padx=5, pady=5, ipadx=5, ipady=5)
+#=========================
+colors = {'red': '#FF0000', 'yellow' : '#FFFF00','orange' : '#FFA500', 'purple' : '#800080', 'white' : '#FFFFFF', 'black': '#000000', 'blue':'#0000FF'}
+
 i,j=0,0
 for color in colors:
-    Button(frame_colors,bg=colors[color], text = color).grid(row = i, column= j)
+    Button(frame_colors,bg=color, text = color,width = 5).grid(row = i, column= j)
     if i < 3:
         i += 1
     else:
         j +=1
         i=0
+#=========================
+
+Button(frame_tool,bg=color, text = "ERASER",width = 5).grid(row = 0, columnspan = 2)
+Button(frame_tool,bg=color, text = "CLEAR",width = 5).grid(row = 1, columnspan = 2)
+
+#=========================
+
+
+
 
 
 
